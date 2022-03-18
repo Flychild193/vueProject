@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // internet request: aaa -> 自己處理
+    // 處理: aaa111 -> 自己處理
+    // 處理: aaa111222 -> 自己處理
+
+    // new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve('aaa')
+    //     },1000)
+    // }).then(res => {
+    //     // 1. 自己處理10行代碼
+    //     console.log(res,'第一層的10行處理代碼');
+    //
+    //     // 2. 對結果進行第一次處理
+    //     return new Promise((resolve) => {
+    //         resolve(res+'111')
+    //     })
+    // }).then(res =>{
+    //     console.log(res,'第二層的10行處理代碼');
+    //
+    //     // 3. 對結果進行第2次處理
+    //     return new Promise(resolve => {
+    //         resolve(res +'222')
+    //     })
+    // }).then(res => {
+    //     console.log(res,'第3層的10行處理代碼');
+    // })
+
+
+    // //new Promise(resolve => resolve(結果))簡寫
+    // new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve('aaa')
+    //     },1000)
+    // }).then(res => {
+    //     // 1. 自己處理10行代碼
+    //     console.log(res,'第一層的10行處理代碼');
+    //
+    //     // 2. 對結果進行第一次處理
+    //     return Promise.resolve(res+'111')
+    // }).then(res =>{
+    //     console.log(res,'第二層的10行處理代碼');
+    //
+    //     // 3. 對結果進行第2次處理
+    //     return Promise.resolve(res+'222')
+    // }).then(res => {
+    //     console.log(res,'第3層的10行處理代碼');
+    // })
+
+    //new Promise(resolve => resolve(結果))簡寫
+    // new Promise((resolve, reject) => {
+    //     setTimeout(() => {
+    //         resolve('aaa')
+    //     },1000)
+    // }).then(res => {
+    //     // 1. 自己處理10行代碼
+    //     console.log(res,'第一層的10行處理代碼');
+    //
+    //     // 2. 對結果進行第一次處理
+    //     return res + '111'
+    // }).then(res =>{
+    //     console.log(res,'第二層的10行處理代碼');
+    //
+    //     // 3. 對結果進行第2次處理
+    //     return res +'222'
+    // }).then(res => {
+    //     console.log(res,'第3層的10行處理代碼');
+    // })
+
+
+    //new Promise(resolve => resolve(結果))簡寫
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve('aaa')
+        },1000)
+    }).then(res => {
+        // 1. 自己處理10行代碼
+        console.log(res,'第一層的10行處理代碼');
+
+        // 2. 對結果進行第一次處理
+        // return Promise.reject('error message')
+        throw 'error message'
+    }).then(res =>{
+        console.log(res,'第二層的10行處理代碼');
+
+        // 3. 對結果進行第2次處理
+        return Promise.resolve(res+'222')
+    }).then(res => {
+        console.log(res,'第3層的10行處理代碼');
+    }).catch(err =>{
+        console.log(err);
+    })
+
+
+</script>
+</body>
+</html>

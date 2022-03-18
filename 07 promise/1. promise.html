@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    // 1. use setTimeout
+    setTimeout(() => {
+        console.log('Hello World');
+    }, 1000)
+
+    // 參數->函數 (resolve,reject)
+    //  resolve, reject 本身他們又是函數
+    // 鏈式編程
+    new Promise((resolve, reject) => {
+
+        // 1. first internet request
+        setTimeout(() => {
+            resolve()
+        }, 1000)
+    }).then(()=>{
+        // first 處理的代碼
+        console.log('hello world');
+
+        return new Promise((resolve, reject) => {
+            // 2. second internet request
+            setTimeout(() => {
+                resolve()
+            },1000)
+        })
+    }).then(() => {
+        // second 處理的代碼
+        console.log('hello vuejs');
+
+        return new Promise((resolve, reject) => {
+            // 3. third internet request
+            setTimeout(() => {
+                resolve()
+            })
+        })
+    }).then(() => {
+        // third 處理的代碼
+            console.log('hello python');
+        })
+    // 什麼時候下用到promise? 對異步操作進行封裝
+    new Promise((resolve, reject) => {
+        setTimeout(() => {
+            // 成功的時候調用 resolve
+            //resolve('hello world')
+
+            //失敗的時候調用 reject
+            reject('error message')
+        },1000)
+    }).then((data) => {
+        console.log(data);
+    }).catch((err) =>{
+        console.log(data);
+    })
+
+</script>
+</body>
+</html>
